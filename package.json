@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest watch",
+    "list_tests": "vitest list *.spec.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
-    "node": "^24.8.0"
+    "node": "^24.8.0",
+    "vitest": "^3.2.4"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
