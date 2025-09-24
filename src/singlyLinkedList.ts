@@ -84,6 +84,23 @@ export class SinglyLinkedList {
     return true;
   }
 
+  public reverseTraverse(): boolean {
+    if (!this.head) {
+      throw new Error(EMPTY_LIST_MESSAGE);
+    }
+
+    let current = this.head;
+    let currentTail = this.tail;
+
+    while (currentTail !== this.head) {
+      if (current.next === currentTail) {
+        currentTail = current;
+        current = this.head;
+      }
+    }
+    return true;
+  }
+
   public printList(): string {
     let output = "";
     let current = this.head;

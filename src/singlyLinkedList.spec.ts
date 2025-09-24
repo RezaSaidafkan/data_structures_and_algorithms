@@ -95,4 +95,34 @@ describe("Singly Linked List", () => {
       );
     });
   });
+
+  describe("reverseTraverse", () => {
+    it("should traverse a populated list in reverse and return true", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(10);
+      singlyLinkedList.insert(20);
+
+      // Act & Assert
+      expect(singlyLinkedList.reverseTraverse()).toBeTruthy();
+    });
+
+    it("should traverse a single node list in reverse and return true", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(10);
+
+      // Act & Assert
+      expect(singlyLinkedList.reverseTraverse()).toBeTruthy();
+    });
+
+    it("should throw traversing an empty single node list in reverse", () => {
+      // Arrange, Act & Assert
+      const singlyLinkedList = new SinglyLinkedList();
+
+      expect(() => singlyLinkedList.reverseTraverse()).toThrowError(
+        EMPTY_LIST_MESSAGE
+      );
+    });
+  });
 });
