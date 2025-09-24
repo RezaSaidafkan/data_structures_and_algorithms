@@ -63,7 +63,7 @@ export class SinglyLinkedList {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
-    let current: LinkedNode | null = this.head;
+    let current: LinkedNode | null = this.head; // in case currrent is a tail, current.next would be null
     while (current) {
       if (current.value === valueToFind) {
         return current;
@@ -71,6 +71,17 @@ export class SinglyLinkedList {
       current = current.next;
     }
     throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
+  }
+
+  public traverse(): boolean {
+    if (!this.head) {
+      throw new Error(EMPTY_LIST_MESSAGE);
+    }
+    let current: LinkedNode | null = this.head;
+    while (current) {
+      current = current.next;
+    }
+    return true;
   }
 
   public printList(): string {

@@ -61,12 +61,36 @@ describe("Singly Linked List", () => {
         ELEMENT_NOT_FOUND_MESSAGE
       );
     });
+
     it("it should throw error when searching in an empty list", () => {
       // Arrange
       const singlyLinkedList = new SinglyLinkedList();
 
       // Act & Assert
       expect(() => singlyLinkedList.search(10)).toThrowError(
+        EMPTY_LIST_MESSAGE
+      );
+    });
+  });
+
+  describe("traverse", () => {
+    it("it should traverse a populated linked list and return true", () => {
+      // Arrange, Act & Assert
+      const singlyLinkedList = new SinglyLinkedList();
+      expect(singlyLinkedList.insert(10)).toBeTruthy;
+      expect(singlyLinkedList.insert(20)).toBeTruthy;
+    });
+
+    it("should traverse a single node list and return true", () => {
+      // Arrange, Act & Assert
+      const singlyLinkedList = new SinglyLinkedList();
+      expect(singlyLinkedList.insert(10)).toBeTruthy;
+    });
+
+    it("should throw if the list is empty", () => {
+      // Arrange, Act & Assert
+      const singlyLinkedList = new SinglyLinkedList();
+      expect(() => singlyLinkedList.traverse()).toThrowError(
         EMPTY_LIST_MESSAGE
       );
     });
