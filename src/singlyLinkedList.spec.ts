@@ -5,30 +5,70 @@ const EMPTY_LIST_MESSAGE = "Singly Linked List is empty";
 const ELEMENT_NOT_FOUND_MESSAGE = "Element not found in the list";
 
 describe("Singly Linked List", () => {
-  it("should create an empty list", () => {
-    const singlyLinkedList = new SinglyLinkedList();
-    expect(singlyLinkedList).toBeDefined();
+  describe("insert", () => {
+    it("should create an empty list", () => {
+      // Arrange & Act
+      const singlyLinkedList = new SinglyLinkedList();
+
+      // Assert
+      expect(singlyLinkedList).toBeDefined();
+    });
+
+    it("should insert values at the end of the list", () => {
+      // Arrange & Act
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(10);
+      singlyLinkedList.insert(20);
+      singlyLinkedList.insert(30);
+
+      // Assert
+      expect(singlyLinkedList).toBeDefined();
+    });
   });
 
-  it("should insert values at the end of the list", () => {
-    const singlyLinkedList = new SinglyLinkedList();
-    singlyLinkedList.insert(10);
-    singlyLinkedList.insert(20);
-    singlyLinkedList.insert(30);
-    expect(singlyLinkedList).toBeDefined();
+  describe("remove", () => {
+    it("should remove values from the list", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(10);
+      singlyLinkedList.insert(20);
+      singlyLinkedList.insert(30);
+
+      // Act & Assert
+      expect(singlyLinkedList.remove(20)).toBe(true);
+      expect(singlyLinkedList.remove(10)).toBe(true);
+      expect(() => singlyLinkedList.remove(50)).toThrowError(
+        ELEMENT_NOT_FOUND_MESSAGE
+      ); // removing non-existing
+      expect(singlyLinkedList.remove(30)).toBe(true);
+      expect(() => singlyLinkedList.remove(40)).toThrowError(
+        EMPTY_LIST_MESSAGE
+      ); // removing from an empty list
+    });
   });
 
-  it("should remove values from the list", () => {
-    const singlyLinkedList = new SinglyLinkedList();
-    singlyLinkedList.insert(10);
-    singlyLinkedList.insert(20);
-    singlyLinkedList.insert(30);
-    expect(singlyLinkedList.remove(20)).toBe(true);
-    expect(singlyLinkedList.remove(10)).toBe(true);
-    expect(() => singlyLinkedList.remove(50)).toThrowError(
-      ELEMENT_NOT_FOUND_MESSAGE
-    ); // removing non-existing
-    expect(singlyLinkedList.remove(30)).toBe(true);
-    expect(() => singlyLinkedList.remove(40)).toThrowError(EMPTY_LIST_MESSAGE); // removing from an empty list
+  describe("search", () => {
+    it("it should find the existing node", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(20);
+      singlyLinkedList.insert(10);
+
+      // Act & Assert
+      expect(singlyLinkedList.search(10).value).toBe(10);
+      expect(singlyLinkedList.search(20).value).toBe(20);
+      expect(() => singlyLinkedList.search(30)).toThrowError(
+        ELEMENT_NOT_FOUND_MESSAGE
+      );
+    });
+    it("it should throw error when searching in an empty list", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+
+      // Act & Assert
+      expect(() => singlyLinkedList.search(10)).toThrowError(
+        EMPTY_LIST_MESSAGE
+      );
+    });
   });
 });

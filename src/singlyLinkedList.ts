@@ -59,6 +59,20 @@ export class SinglyLinkedList {
     throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
   }
 
+  public search(valueToFind: any): LinkedNode {
+    if (!this.head) {
+      throw new Error(EMPTY_LIST_MESSAGE);
+    }
+    let current: LinkedNode | null = this.head;
+    while (current) {
+      if (current.value === valueToFind) {
+        return current;
+      }
+      current = current.next;
+    }
+    throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
+  }
+
   public printList(): string {
     let output = "";
     let current = this.head;
