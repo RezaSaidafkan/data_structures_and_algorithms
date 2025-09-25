@@ -1,10 +1,12 @@
 // Pre: value to insert
 // Post: value inserted at the end of the list
 
-import { DataStructure, NodeInterface } from "./dataStructureInterface";
-
-const EMPTY_LIST_MESSAGE = "Singly Linked List is empty";
-const ELEMENT_NOT_FOUND_MESSAGE = "Element not found in the list";
+import {
+  DataStructure,
+  NodeInterface,
+  EMPTY_LIST_MESSAGE,
+  ELEMENT_NOT_FOUND_MESSAGE,
+} from "./dataStructureInterface";
 
 interface LinkedNode<T> extends NodeInterface<T> {
   value: T;
@@ -75,18 +77,18 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
     throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
   }
 
-  public traverse(): boolean {
+  public traverse(): NodeInterface<T> {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
-    let current: LinkedNode<T> | null = this.head;
-    while (current) {
+    let current = this.head;
+    while (current.next) {
       current = current.next;
     }
-    return true;
+    return current;
   }
 
-  public reverseTraverse(): boolean {
+  public reverseTraverse(): NodeInterface<T> {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
@@ -100,7 +102,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
         current = this.head;
       }
     }
-    return true;
+    return current;
   }
 
   public printList(): string {

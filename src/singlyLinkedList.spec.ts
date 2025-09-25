@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { SinglyLinkedList } from "./singlyLinkedList";
-
-const EMPTY_LIST_MESSAGE = "Singly Linked List is empty";
-const ELEMENT_NOT_FOUND_MESSAGE = "Element not found in the list";
+import {
+  EMPTY_LIST_MESSAGE,
+  ELEMENT_NOT_FOUND_MESSAGE,
+} from "./dataStructureInterface";
 
 describe("Singly Linked List", () => {
   describe("insert", () => {
