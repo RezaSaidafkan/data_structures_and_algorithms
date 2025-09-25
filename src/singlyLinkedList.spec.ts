@@ -11,7 +11,12 @@ describe("Singly Linked List", () => {
       const singlyLinkedList = new SinglyLinkedList();
 
       // Assert
-      expect(singlyLinkedList).toBeDefined();
+      expect(singlyLinkedList).toEqual(
+        expect.objectContaining({
+          head: null,
+          tail: null,
+        })
+      );
     });
 
     it("should insert values at the end of the list", () => {
@@ -22,7 +27,12 @@ describe("Singly Linked List", () => {
       singlyLinkedList.insert(30);
 
       // Assert
-      expect(singlyLinkedList).toBeDefined();
+      expect(singlyLinkedList).toEqual(
+        expect.objectContaining({
+          head: expect.objectContaining({ value: 10 }),
+          tail: expect.objectContaining({ value: 30 }),
+        })
+      );
     });
   });
 
@@ -37,6 +47,13 @@ describe("Singly Linked List", () => {
       // Act & Assert
       expect(singlyLinkedList.remove(20)).toBe(true);
       expect(singlyLinkedList.remove(10)).toBe(true);
+
+      expect(singlyLinkedList).toEqual(
+        expect.objectContaining({
+          head: expect.objectContaining({ value: 30 }),
+          tail: expect.objectContaining({ value: 30 }),
+        })
+      );
       expect(() => singlyLinkedList.remove(50)).toThrowError(
         ELEMENT_NOT_FOUND_MESSAGE
       ); // removing non-existing
