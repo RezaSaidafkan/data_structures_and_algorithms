@@ -1,22 +1,24 @@
 // Pre: value to insert
 // Post: value inserted at the end of the list
 
+import { DataStructure, NodeInterface } from "./dataStructureInterface";
+
 const EMPTY_LIST_MESSAGE = "Singly Linked List is empty";
 const ELEMENT_NOT_FOUND_MESSAGE = "Element not found in the list";
 
-type LinkedNode = {
-  value: any;
-  next: LinkedNode | null;
-};
+interface LinkedNode<T> extends NodeInterface<T> {
+  value: T;
+  next: LinkedNode<T> | null;
+}
 
-export class SinglyLinkedList {
+export class SinglyLinkedList<T> implements DataStructure<T> {
   constructor(
-    protected head: LinkedNode | null = null,
-    protected tail: LinkedNode | null = null
+    protected head: LinkedNode<T> | null = null,
+    protected tail: LinkedNode<T> | null = null
   ) {}
 
-  public insert(newValue: any): void {
-    const newNode = { value: newValue, next: null } as LinkedNode;
+  public insert(newValue: T): void {
+    const newNode = { value: newValue, next: null } as LinkedNode<T>;
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -26,7 +28,7 @@ export class SinglyLinkedList {
     }
   }
 
-  public remove(valueToRemove: any): boolean {
+  public remove(valueToRemove: T): boolean {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
@@ -42,7 +44,7 @@ export class SinglyLinkedList {
         return true;
       }
     }
-    let current: LinkedNode | null = this.head;
+    let current: LinkedNode<T> | null = this.head;
     while (current.next) {
       // if value matches the head & tail
       if (current.next.value === valueToRemove) {
@@ -59,11 +61,11 @@ export class SinglyLinkedList {
     throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
   }
 
-  public search(valueToFind: any): LinkedNode {
+  public search(valueToFind: T): LinkedNode<T> {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
-    let current: LinkedNode | null = this.head; // in case currrent is a tail, current.next would be null
+    let current: LinkedNode<T> | null = this.head; // in case currrent is a tail, current.next would be null
     while (current) {
       if (current.value === valueToFind) {
         return current;
@@ -77,7 +79,7 @@ export class SinglyLinkedList {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }
-    let current: LinkedNode | null = this.head;
+    let current: LinkedNode<T> | null = this.head;
     while (current) {
       current = current.next;
     }
