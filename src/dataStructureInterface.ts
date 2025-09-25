@@ -9,5 +9,5 @@ export interface DataStructure<T> {
   insert(newValue: T): void;
   search(valueToSearch: T): NodeInterface<T>;
   traverse(): NodeInterface<T>;
-  reverserTraverse(): NodeInterface<T>;
+  reverseTraverse(): NodeInterface<T>;
 }

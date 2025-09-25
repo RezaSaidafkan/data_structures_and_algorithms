@@ -58,7 +58,7 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
     return current;
   }
 
-  public reverserTraverse(): NodeInterface<T> {
+  public reverseTraverse(): NodeInterface<T> {
     if (!this.tail) {
       throw new Error(EMPTY_LIST_MESSAGE);
     }

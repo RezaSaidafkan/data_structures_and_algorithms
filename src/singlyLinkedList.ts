@@ -97,9 +97,11 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
     let currentTail = this.tail;
 
     while (currentTail !== this.head) {
-      if (current.next === currentTail) {
+      if (current.next == currentTail) {
         currentTail = current;
         current = this.head;
+      } else {
+        current = current.next!;
       }
     }
     return current;

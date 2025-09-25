@@ -133,7 +133,7 @@ describe("doublyLinkedList", () => {
       const doubleLinkedList = new DoublyLinkedList();
 
       // Act & Assert
-      expect(() => doubleLinkedList.reverserTraverse()).toThrowError(
+      expect(() => doubleLinkedList.reverseTraverse()).toThrowError(
         EMPTY_LIST_MESSAGE
       );
     });
@@ -146,7 +146,7 @@ describe("doublyLinkedList", () => {
       doubleLinkedList.insert(30);
 
       // Act & Assert
-      expect(doubleLinkedList.reverserTraverse()).toEqual(
+      expect(doubleLinkedList.reverseTraverse()).toEqual(
         expect.objectContaining({ value: 10 })
       );
     });

@@ -92,17 +92,28 @@ describe("Singly Linked List", () => {
   });
 
   describe("traverse", () => {
-    it("it should traverse a populated linked list and return true", () => {
-      // Arrange, Act & Assert
+    it("it should traverse a populated linked list and return the head node", () => {
+      // Arrange
       const singlyLinkedList = new SinglyLinkedList();
       expect(singlyLinkedList.insert(10)).toBeTruthy;
       expect(singlyLinkedList.insert(20)).toBeTruthy;
+
+      // Act & Assert
+      expect(singlyLinkedList.traverse()).toBeTruthy();
+      expect(singlyLinkedList.traverse()).toEqual(
+        expect.objectContaining({ value: 20 })
+      );
     });
 
-    it("should traverse a single node list and return true", () => {
-      // Arrange, Act & Assert
+    it("should traverse a single node list and return the head node", () => {
+      // Arrange
       const singlyLinkedList = new SinglyLinkedList();
-      expect(singlyLinkedList.insert(10)).toBeTruthy;
+      singlyLinkedList.insert(10);
+
+      // Act & Assert
+      expect(singlyLinkedList.traverse()).toEqual(
+        expect.objectContaining({ value: 10 })
+      );
     });
 
     it("should throw if the list is empty", () => {
@@ -122,16 +133,33 @@ describe("Singly Linked List", () => {
       singlyLinkedList.insert(20);
 
       // Act & Assert
-      expect(singlyLinkedList.reverseTraverse()).toBeTruthy();
+      expect(singlyLinkedList.reverseTraverse()).toEqual(
+        expect.objectContaining({ value: 10 })
+      );
     });
 
-    it("should traverse a single node list in reverse and return true", () => {
+    it("should traverse a single node list in reverse and return the tail node", () => {
       // Arrange
       const singlyLinkedList = new SinglyLinkedList();
       singlyLinkedList.insert(10);
 
       // Act & Assert
-      expect(singlyLinkedList.reverseTraverse()).toBeTruthy();
+      expect(singlyLinkedList.reverseTraverse()).toEqual(
+        expect.objectContaining({ value: 10 })
+      );
+    });
+
+    it("should traverse a multi-node list in reverse and return the head node", () => {
+      // Arrange
+      const singlyLinkedList = new SinglyLinkedList();
+      singlyLinkedList.insert(10);
+      singlyLinkedList.insert(20);
+      singlyLinkedList.insert(30);
+
+      // Act & Assert
+      expect(singlyLinkedList.reverseTraverse()).toEqual(
+        expect.objectContaining({ value: 10 })
+      );
     });
 
     it("should throw traversing an empty single node list in reverse", () => {
