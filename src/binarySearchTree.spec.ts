@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { BinarySearchTree } from "./binarySearchTree";
-import { EMPTY_LIST_MESSAGE } from "./dataStructureInterface";
+import {
+  EMPTY_LIST_MESSAGE,
+  ELEMENT_NOT_FOUND_MESSAGE,
+} from "./dataStructureInterface";
 
 describe("BinarySearchTree", () => {
   describe("insert", () => {
@@ -106,6 +109,79 @@ describe("BinarySearchTree", () => {
               value: 10,
             }),
           }),
+        })
+      );
+    });
+  });
+
+  describe("search", () => {
+    it("should throw error if the tree is empty", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+
+      // Act & Assert
+      expect(() => binarySearchTree.search(10)).toThrowError(
+        EMPTY_LIST_MESSAGE
+      );
+    });
+
+    it("should find the proper node in various cases", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(20);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(30);
+      binarySearchTree.insert(25);
+      binarySearchTree.insert(0);
+
+      // Act & Assert
+      expect(binarySearchTree.search(20)).toEqual(
+        expect.objectContaining({
+          value: 20,
+          leftNode: expect.objectContaining({
+            value: 10,
+          }),
+          rightNode: expect.objectContaining({
+            value: 30,
+          }),
+        })
+      );
+
+      expect(binarySearchTree.search(10)).toEqual(
+        expect.objectContaining({
+          value: 10,
+          leftNode: expect.objectContaining({
+            value: 0,
+          }),
+          rightNode: null,
+        })
+      );
+
+      expect(binarySearchTree.search(30)).toEqual(
+        expect.objectContaining({
+          value: 30,
+          leftNode: expect.objectContaining({
+            value: 25,
+          }),
+          rightNode: null,
+        })
+      );
+
+      // able to find leaf nodes
+
+      expect(binarySearchTree.search(0)).toEqual(
+        expect.objectContaining({
+          value: 0,
+          leftNode: null,
+          rightNode: null,
+        })
+      );
+
+      expect(binarySearchTree.search(25)).toEqual(
+        expect.objectContaining({
+          value: 25,
+          leftNode: null,
+          rightNode: null,
         })
       );
     });

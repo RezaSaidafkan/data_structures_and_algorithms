@@ -43,4 +43,23 @@ export class BinarySearchTree<T> implements DataStructure<T> {
       }
     }
   }
+
+  public search(valueToSearch: T): NodeInterface<T> {
+    if (!this.root) {
+      throw new Error(EMPTY_LIST_MESSAGE);
+    }
+
+    let current: BinaryNode<T> | null = this.root;
+
+    while (current) {
+      if (current.value === valueToSearch) {
+        return current;
+      } else if (current.value >= valueToSearch) {
+        current = current.leftNode;
+      } else if (current.value < valueToSearch) {
+        current = current.rightNode;
+      }
+    }
+    throw new Error(ELEMENT_NOT_FOUND_MESSAGE);
+  }
 }
