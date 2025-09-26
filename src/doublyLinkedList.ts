@@ -53,11 +53,12 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
     }
 
     if (this.head.value === valueToRemove) {
-      if (this.tail?.value === valueToRemove) {
+      if (this.tail === this.head) {
         this.head = null;
         this.tail = null;
       } else {
         this.head = this.head.next;
+        this.head!.prev = null;
       }
       return true;
     } else if (this.tail?.value === valueToRemove) {
@@ -70,8 +71,10 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
     while (current?.next) {
       if (current.value === valueToRemove) {
         current.prev!.next = current.next;
+        current.next!.prev = current.prev;
         return true;
       }
+      current = current.next;
     }
     return false;
   }
