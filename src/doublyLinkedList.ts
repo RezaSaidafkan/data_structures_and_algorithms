@@ -47,6 +47,35 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
     throw Error(ELEMENT_NOT_FOUND_MESSAGE);
   }
 
+  public remove(valueToRemove: T): boolean {
+    if (!this.head) {
+      throw new Error(EMPTY_LIST_MESSAGE);
+    }
+
+    if (this.head.value === valueToRemove) {
+      if (this.tail?.value === valueToRemove) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.head = this.head.next;
+      }
+      return true;
+    } else if (this.tail?.value === valueToRemove) {
+      this.tail = this.tail.prev;
+      this.tail!.next = null;
+      return true;
+    }
+
+    let current = this.head.next;
+    while (current?.next) {
+      if (current.value === valueToRemove) {
+        current.prev!.next = current.next;
+        return true;
+      }
+    }
+    return false;
+  }
+
   public traverse(): NodeInterface<T> {
     if (!this.head) {
       throw new Error(EMPTY_LIST_MESSAGE);
