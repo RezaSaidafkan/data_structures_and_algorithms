@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { DoublyLinkedList } from "./doublyLinkedList";
-import { EMPTY_LIST_MESSAGE } from "./dataStructureInterface";
+import { EMPTY_DATASTRUCTURE_MESSAGE } from "./dataStructureInterface";
 
 describe("doublyLinkedList", () => {
   describe("insert", () => {
@@ -55,7 +55,7 @@ describe("doublyLinkedList", () => {
 
       // Act & Assert
       expect(() => doubleLinkedList.search("some value")).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
 
@@ -109,7 +109,7 @@ describe("doublyLinkedList", () => {
 
       // Act & Assert
       expect(() => doubleLinkedList.search("some value")).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
 
@@ -187,7 +187,7 @@ describe("doublyLinkedList", () => {
 
       // Act & Assert
       expect(() => doubleLinkedList.traverse()).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
 
@@ -212,7 +212,7 @@ describe("doublyLinkedList", () => {
 
       // Act & Assert
       expect(() => doubleLinkedList.reverseTraverse()).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
 

@@ -1,9 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { BinarySearchTree } from "./binarySearchTree";
 import {
-  EMPTY_LIST_MESSAGE,
+  EMPTY_DATASTRUCTURE_MESSAGE,
   ELEMENT_NOT_FOUND_MESSAGE,
 } from "./dataStructureInterface";
+import { DoublyLinkedList } from "./doublyLinkedList";
 
 describe("BinarySearchTree", () => {
   describe("insert", () => {
@@ -121,7 +122,7 @@ describe("BinarySearchTree", () => {
 
       // Act & Assert
       expect(() => binarySearchTree.search(10)).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
 
@@ -182,6 +183,233 @@ describe("BinarySearchTree", () => {
           value: 25,
           leftNode: null,
           rightNode: null,
+        })
+      );
+    });
+  });
+
+  describe("delete", () => {
+    it("should throw if the tree is empty", () => {
+      // Arrange
+      const doubleLinkedList = new DoublyLinkedList();
+
+      // Act & Assert
+      expect(() => doubleLinkedList.remove("some value")).toThrowError(
+        EMPTY_DATASTRUCTURE_MESSAGE
+      );
+    });
+
+    it("should remove matched node which in a single node tree", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+
+      // Act
+      binarySearchTree.remove(16);
+
+      // Assert
+      expect(binarySearchTree).toEqual(expect.objectContaining({ root: null }));
+    });
+
+    it("should remove a leaf matched node in a multiple node tree which was a left node", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+      binarySearchTree.insert(17);
+      binarySearchTree.insert(13);
+      binarySearchTree.insert(14);
+      binarySearchTree.insert(11);
+      binarySearchTree.insert(12);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(15);
+
+      // Act
+      binarySearchTree.remove(10);
+
+      // // Assert
+      expect(binarySearchTree).toEqual(
+        expect.objectContaining({
+          root: expect.objectContaining({
+            value: 16,
+            leftNode: expect.objectContaining({
+              value: 13,
+              rightNode: expect.objectContaining({
+                value: 14,
+                leftNode: null,
+                rightNode: expect.objectContaining({
+                  value: 15,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+              leftNode: expect.objectContaining({
+                value: 11,
+                leftNode: null,
+                rightNode: expect.objectContaining({
+                  value: 12,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+            }),
+            rightNode: expect.objectContaining({
+              value: 17,
+              leftNode: null,
+              rightNode: null,
+            }),
+          }),
+        })
+      );
+    });
+
+    it("should remove a leaf matched node in a multiple node tree which was a right node", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+      binarySearchTree.insert(17);
+      binarySearchTree.insert(13);
+      binarySearchTree.insert(14);
+      binarySearchTree.insert(11);
+      binarySearchTree.insert(12);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(15);
+
+      // Act
+      binarySearchTree.remove(12);
+
+      // // Assert
+      expect(binarySearchTree).toEqual(
+        expect.objectContaining({
+          root: expect.objectContaining({
+            value: 16,
+            leftNode: expect.objectContaining({
+              value: 13,
+              rightNode: expect.objectContaining({
+                value: 14,
+                leftNode: null,
+                rightNode: expect.objectContaining({
+                  value: 15,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+              leftNode: expect.objectContaining({
+                value: 11,
+                rightNode: null,
+                leftNode: expect.objectContaining({
+                  value: 10,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+            }),
+            rightNode: expect.objectContaining({
+              value: 17,
+              leftNode: null,
+              rightNode: null,
+            }),
+          }),
+        })
+      );
+    });
+
+    it("should remove a matched middle node in a multiple node tree which was a left node", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+      binarySearchTree.insert(17);
+      binarySearchTree.insert(13);
+      binarySearchTree.insert(14);
+      binarySearchTree.insert(11);
+      binarySearchTree.insert(12);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(15);
+
+      // Act
+      binarySearchTree.remove(11);
+
+      // // Assert
+      expect(binarySearchTree).toEqual(
+        expect.objectContaining({
+          root: expect.objectContaining({
+            value: 16,
+            leftNode: expect.objectContaining({
+              value: 13,
+              leftNode: expect.objectContaining({
+                value: 12,
+                leftNode: expect.objectContaining({
+                  value: 10,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+              rightNode: expect.objectContaining({
+                value: 14,
+                rightNode: expect.objectContaining({
+                  value: 15,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+                leftNode: null,
+              }),
+            }),
+            rightNode: expect.objectContaining({
+              value: 17,
+              leftNode: null,
+              rightNode: null,
+            }),
+          }),
+        })
+      );
+    });
+
+    it("should remove a matched middle node in a multiple node tree which was a right node", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+      binarySearchTree.insert(17);
+      binarySearchTree.insert(13);
+      binarySearchTree.insert(14);
+      binarySearchTree.insert(11);
+      binarySearchTree.insert(12);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(15);
+
+      // Act
+      binarySearchTree.remove(14);
+
+      // // Assert
+      expect(binarySearchTree).toEqual(
+        expect.objectContaining({
+          root: expect.objectContaining({
+            value: 16,
+            leftNode: expect.objectContaining({
+              value: 13,
+              rightNode: expect.objectContaining({
+                value: 15,
+                leftNode: null,
+                rightNode: null,
+              }),
+              leftNode: expect.objectContaining({
+                value: 11,
+                leftNode: expect.objectContaining({
+                  value: 10,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+                rightNode: expect.objectContaining({
+                  value: 12,
+                  leftNode: null,
+                  rightNode: null,
+                }),
+              }),
+            }),
+            rightNode: expect.objectContaining({
+              value: 17,
+              leftNode: null,
+              rightNode: null,
+            }),
+          }),
         })
       );
     });

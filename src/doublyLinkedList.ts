@@ -1,7 +1,7 @@
 import {
   DataStructure,
   NodeInterface,
-  EMPTY_LIST_MESSAGE,
+  EMPTY_DATASTRUCTURE_MESSAGE,
   ELEMENT_NOT_FOUND_MESSAGE,
 } from "./dataStructureInterface";
 
@@ -35,7 +35,7 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
 
   public search(valueToSearch: T): NodeInterface<T> {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
     let current: DoublyLinkedNode<T> | null = this.head;
     while (current) {
@@ -49,7 +49,7 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
 
   public remove(valueToRemove: T): boolean {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
 
     if (this.head.value === valueToRemove) {
@@ -81,7 +81,7 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
 
   public traverse(): NodeInterface<T> {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
     let current = this.head;
     while (current.next) {
@@ -92,7 +92,7 @@ export class DoublyLinkedList<T> implements DataStructure<T> {
 
   public reverseTraverse(): NodeInterface<T> {
     if (!this.tail) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
     let current = this.tail;
     while (current.prev) {

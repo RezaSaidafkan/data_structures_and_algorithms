@@ -4,7 +4,7 @@
 import {
   DataStructure,
   NodeInterface,
-  EMPTY_LIST_MESSAGE,
+  EMPTY_DATASTRUCTURE_MESSAGE,
   ELEMENT_NOT_FOUND_MESSAGE,
 } from "./dataStructureInterface";
 
@@ -32,7 +32,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
 
   public remove(valueToRemove: T): boolean {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
 
     if (this.head.value === valueToRemove) {
@@ -65,7 +65,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
 
   public search(valueToFind: T): LinkedNode<T> {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
     let current: LinkedNode<T> | null = this.head; // in case currrent is a tail, current.next would be null
     while (current) {
@@ -79,7 +79,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
 
   public traverse(): NodeInterface<T> {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
     let current = this.head;
     while (current.next) {
@@ -90,7 +90,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
 
   public reverseTraverse(): NodeInterface<T> {
     if (!this.head) {
-      throw new Error(EMPTY_LIST_MESSAGE);
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
     }
 
     let current = this.head;
@@ -119,7 +119,7 @@ export class SinglyLinkedList<T> implements DataStructure<T> {
       current = current.next;
     }
     if (!output) {
-      return EMPTY_LIST_MESSAGE;
+      return EMPTY_DATASTRUCTURE_MESSAGE;
     }
     return output;
   }

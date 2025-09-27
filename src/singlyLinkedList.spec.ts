@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { SinglyLinkedList } from "./singlyLinkedList";
 import {
-  EMPTY_LIST_MESSAGE,
+  EMPTY_DATASTRUCTURE_MESSAGE,
   ELEMENT_NOT_FOUND_MESSAGE,
 } from "./dataStructureInterface";
 
@@ -60,7 +60,7 @@ describe("Singly Linked List", () => {
       ); // removing non-existing
       expect(singlyLinkedList.remove(30)).toBe(true);
       expect(() => singlyLinkedList.remove(40)).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       ); // removing from an empty list
     });
   });
@@ -86,7 +86,7 @@ describe("Singly Linked List", () => {
 
       // Act & Assert
       expect(() => singlyLinkedList.search(10)).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
   });
@@ -120,7 +120,7 @@ describe("Singly Linked List", () => {
       // Arrange, Act & Assert
       const singlyLinkedList = new SinglyLinkedList();
       expect(() => singlyLinkedList.traverse()).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
   });
@@ -167,7 +167,7 @@ describe("Singly Linked List", () => {
       const singlyLinkedList = new SinglyLinkedList();
 
       expect(() => singlyLinkedList.reverseTraverse()).toThrowError(
-        EMPTY_LIST_MESSAGE
+        EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
   });
