@@ -77,18 +77,24 @@ export class BinarySearchTree<T> {
         if (current === this.root && !current.leftNode && !current.rightNode) {
           // case 2: match in a single node tree
           this.root = null;
-        }
-        if (current === this.root) {
-          // case 3: if match is the root node in a multiple node tree
-          this.leftTrimBranches(current);
-          this.root = current;
+          break;
         } else if (!current.leftNode && !current.rightNode) {
-          // case 4: if match is a leaf node in a multiple node tree
+          // case 3: if match is a leaf node in a multiple node tree
           if (ancestor.leftNode === current) {
             ancestor.leftNode = null;
           } else {
             ancestor.rightNode = null;
           }
+          break;
+        } else if (current === this.root) {
+          // case 4: if match is the root node in a multiple node tree
+          this.leftTrimBranches(current);
+          if (current.rightNode) {
+            this.root = current.rightNode;
+          } else {
+            this.root = current.leftNode;
+          }
+          break;
         } else {
           // case 5: match is between root and leaf nodes
           this.leftTrimBranches(current);
