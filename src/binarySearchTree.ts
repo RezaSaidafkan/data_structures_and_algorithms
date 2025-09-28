@@ -10,8 +10,20 @@ interface BinaryNode<T> extends NodeInterface<T> {
   rightNode: BinaryNode<T> | null;
 }
 
-// export class BinarySearchTree<T> implements DataStructure<T> {
-export class BinarySearchTree<T> {
+interface SearchTree<T> {
+  insert(newValue: T): void;
+  search(valueToSearch: T): NodeInterface<T>;
+  remove(valueToRemove: T): boolean;
+  postOrderTraverse(
+    root: BinaryNode<T> | null
+  ): Generator<BinaryNode<T> | null>;
+  preOrderTraverse(root: BinaryNode<T> | null): Generator<BinaryNode<T> | null>;
+  inOrderTraverse(root: BinaryNode<T> | null): Generator<BinaryNode<T> | null>;
+  breadthFirstTraverse(
+    root: BinaryNode<T> | null
+  ): Generator<BinaryNode<T> | null>;
+}
+export class BinarySearchTree<T> implements SearchTree<T> {
   constructor(private root: BinaryNode<T> | null = null) {}
 
   public insert(newValue: T): void {
@@ -135,6 +147,19 @@ export class BinarySearchTree<T> {
 
       // trim the left branch
       node.leftNode = null;
+    }
+  }
+
+  public *preOrderTraverse(
+    root: BinaryNode<T> | null = this.root
+  ): Generator<BinaryNode<T> | null> {
+    if (!this.root) {
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
+    }
+    if (root) {
+      yield root;
+      yield* this.preOrderTraverse(root.leftNode);
+      yield* this.preOrderTraverse(root.rightNode);
     }
   }
 }
