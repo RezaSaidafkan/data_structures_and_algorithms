@@ -190,10 +190,10 @@ describe("BinarySearchTree", () => {
   describe("delete", () => {
     it("should throw if the tree is empty", () => {
       // Arrange
-      const doubleLinkedList = new DoublyLinkedList();
+      const binarySearchTree = new BinarySearchTree();
 
       // Act & Assert
-      expect(() => doubleLinkedList.remove("some value")).toThrowError(
+      expect(() => binarySearchTree.remove("some value")).toThrowError(
         EMPTY_DATASTRUCTURE_MESSAGE
       );
     });
@@ -414,7 +414,7 @@ describe("BinarySearchTree", () => {
     });
   });
 
-  describe.only("postOrderTraverse", () => {
+  describe("postOrderTraverse", () => {
     it("should throw when tree is empty", () => {
       // Arrange
       const binarySearchTree = new BinarySearchTree();
