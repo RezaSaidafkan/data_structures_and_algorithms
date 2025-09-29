@@ -414,7 +414,7 @@ describe("BinarySearchTree", () => {
     });
   });
 
-  describe("postOrderTraverse", () => {
+  describe("preOrderTraverse", () => {
     it("should throw when tree is empty", () => {
       // Arrange
       const binarySearchTree = new BinarySearchTree();
@@ -445,6 +445,7 @@ describe("BinarySearchTree", () => {
       binarySearchTree.insert(14);
       binarySearchTree.insert(11);
       binarySearchTree.insert(12);
+      binarySearchTree.insert(9);
       binarySearchTree.insert(10);
       binarySearchTree.insert(15);
 
@@ -453,11 +454,61 @@ describe("BinarySearchTree", () => {
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 16 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 13 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 11 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 9 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 10 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 12 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 14 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 15 }));
       expect(gen.next().value).toEqual(expect.objectContaining({ value: 17 }));
+    });
+  });
+
+  describe("postOrderTraverse", () => {
+    it("should throw when tree is empty", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+
+      // Act & Assert
+      const gen = binarySearchTree.postOrderTraverse();
+      expect(() => gen.next()).toThrowError(EMPTY_DATASTRUCTURE_MESSAGE);
+    });
+
+    it("should yield the root in a single node tree", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(1);
+
+      // Act
+      const gen = binarySearchTree.postOrderTraverse();
+
+      // Assert
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 1 }));
+    });
+
+    it("should visit through nodes from left branches", () => {
+      // Arrange
+      const binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(16);
+      binarySearchTree.insert(17);
+      binarySearchTree.insert(13);
+      binarySearchTree.insert(14);
+      binarySearchTree.insert(11);
+      binarySearchTree.insert(12);
+      binarySearchTree.insert(9);
+      binarySearchTree.insert(10);
+      binarySearchTree.insert(15);
+
+      // Act & Assert
+      const gen = binarySearchTree.postOrderTraverse();
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 10 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 9 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 12 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 11 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 15 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 14 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 13 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 17 }));
+      expect(gen.next().value).toEqual(expect.objectContaining({ value: 16 }));
     });
   });
 });
