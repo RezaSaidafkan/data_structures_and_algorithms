@@ -1,5 +1,4 @@
 import {
-  DataStructure,
   NodeInterface,
   EMPTY_DATASTRUCTURE_MESSAGE,
   ELEMENT_NOT_FOUND_MESSAGE,
@@ -187,6 +186,32 @@ export class BinarySearchTree<T> implements SearchTree<T> {
       yield* this.inOrderTraverse(root.leftNode);
       yield root;
       yield* this.inOrderTraverse(root.rightNode);
+    }
+  }
+
+  public *breadthFirstTraverse(
+    root: BinaryNode<T> | null = this.root
+  ): Generator<BinaryNode<T> | null> {
+    if (!this.root) {
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
+    }
+    const queue: Array<BinaryNode<T>> = [];
+
+    if (root) {
+      queue.push(root);
+
+      while (queue.length > 0) {
+        const current = queue.shift();
+        if (current) {
+          yield current;
+          if (current.leftNode) {
+            queue.push(current.leftNode);
+          }
+          if (current.rightNode) {
+            queue.push(current.rightNode);
+          }
+        }
+      }
     }
   }
 }
