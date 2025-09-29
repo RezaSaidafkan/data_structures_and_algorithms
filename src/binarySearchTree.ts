@@ -176,6 +176,19 @@ export class BinarySearchTree<T> implements SearchTree<T> {
       yield root;
     }
   }
+
+  public *inOrderTraverse(
+    root: BinaryNode<T> | null = this.root
+  ): Generator<BinaryNode<T> | null> {
+    if (!this.root) {
+      throw new Error(EMPTY_DATASTRUCTURE_MESSAGE);
+    }
+    if (root) {
+      yield* this.inOrderTraverse(root.leftNode);
+      yield root;
+      yield* this.inOrderTraverse(root.rightNode);
+    }
+  }
 }
 
 // const binarySearchTree = new BinarySearchTree();
