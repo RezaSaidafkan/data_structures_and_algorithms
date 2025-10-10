@@ -5,7 +5,7 @@ import {EMPTY_DATASTRUCTURE_MESSAGE, ELEMENT_NOT_FOUND_MESSAGE} from './dataStru
 
 describe('head', () => {
     describe('insert', () => {
-        it('should insert new values in order', () => {
+        it('should insert new values in order, swapping a node with its direct parent', () => {
             // Arrange
             const heapTree = new HeapTree();
 
@@ -15,13 +15,37 @@ describe('head', () => {
             heapTree.insert(3)
             heapTree.insert(2)
             heapTree.insert(5)
+
+            // Assert
+            expect(heapTree).toEqual(expect.objectContaining(
+                {'heapArray': [
+                    expect.objectContaining({value: 1}),
+                    expect.objectContaining({value: 2}),
+                    expect.objectContaining({value: 3}),
+                    expect.objectContaining({value: 4}),
+                    expect.objectContaining({value: 5}),
+                    ]
+                })
+            )
+        })
+
+        it('should insert new values in order, swapping a node with all its parent', () => {
+            // Arrange
+            const heapTree = new HeapTree();
+
+            // Act
+            heapTree.insert(4)
+            heapTree.insert(2)
+            heapTree.insert(3)
+            heapTree.insert(1)
+            heapTree.insert(5)
             
             // Assert
             expect(heapTree).toEqual(expect.objectContaining(
                 {'heapArray': [
                     expect.objectContaining({value: 1}),
-                    expect.objectContaining({value: 3}),
                     expect.objectContaining({value: 2}),
+                    expect.objectContaining({value: 3}),
                     expect.objectContaining({value: 4}),
                     expect.objectContaining({value: 5}),
                     ]
